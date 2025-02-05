@@ -1,0 +1,13 @@
+--- Passo a passo ---
+
+(1) Criar um environment com o seguinte comando
+> python -m venv env
+
+(2) Ativar o environment
+> source env/Scripts/activate
+
+(3) Instalar dependências
+> pip install -r requirements.txt
+
+(4) Rodar o script do streamlit
+> streamlit run crawler_v4.py
