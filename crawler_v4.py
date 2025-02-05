@@ -369,7 +369,9 @@ def buscar_jurisprudencias_unificadas(termos):
     return resultados_unificados, total_resultados
 
 # Interface do Streamlit
-st.title("Consulta de Jurisprudência - TJAP, TJBA, TJDFT, TJPR e TJSP")
+st.title("TJSearch")
+st.subheader("Consulta de Jurisprudência Unificada")
+st.subheader("TJAP, TJBA, TJDFT, TJPR e TJSP")
 
 palavras_chave_input = st.text_input("Palavras-chave (separadas por vírgula)")
 palavras_chave = [p.strip() for p in palavras_chave_input.split(",") if p.strip()]
