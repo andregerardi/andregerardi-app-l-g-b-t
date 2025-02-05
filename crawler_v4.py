@@ -5,12 +5,13 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 from bs4 import BeautifulSoup
+import matplotlib.pyplot as plt
+import plotly.express as px
 import re
 import pandas as pd
 import time
 import requests
 import json
-from bs4 import BeautifulSoup
 
 def processar_resultados_tjba(decisoes, total_itens, total_paginas):
     """
@@ -380,3 +381,16 @@ if st.button("Buscar") and palavras_chave:
     resultados_df, total_hits = buscar_jurisprudencias_unificadas(palavras_chave)
     st.write(f"Total de resultados: {total_hits}")
     st.write(resultados_df)
+
+    # Gráfico de barras com Plotly
+    contagem_tribunais = resultados_df['Tribunal'].value_counts(ascending=True).reset_index()
+    contagem_tribunais.columns = ['Tribunal', 'Número de Resultados']
+
+    fig = px.bar(contagem_tribunais, x='Tribunal', y='Número de Resultados', text='Número de Resultados',
+                 title='Distribuição de Resultados por Tribunal')
+
+    fig.update_traces(texttemplate='%{text}', textposition='outside')
+    fig.update_layout(uniformtext_minsize=12, uniformtext_mode='hide', xaxis_title='Tribunal', yaxis_title='Número de Resultados',
+                      xaxis_showgrid=False, yaxis_showgrid=False, font=dict(size=12))  # Aumenta o tamanho da fonte
+
+    st.plotly_chart(fig)
