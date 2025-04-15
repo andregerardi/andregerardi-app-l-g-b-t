@@ -16,6 +16,7 @@ import json
 import io
 import os
 from datetime import datetime
+import undetected_chromedriver
 
 # 🔑 Configuração do 2Captcha
 API_KEY = st.secrets["auth_token"]
