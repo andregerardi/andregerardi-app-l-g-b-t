@@ -18,7 +18,7 @@ import os
 from datetime import datetime
 
 # 🔑 Configuração do 2Captcha
-API_KEY = ""
+API_KEY = API_KEY
 
 # Variável global para armazenar o token do reCAPTCHA
 captcha_token = None
