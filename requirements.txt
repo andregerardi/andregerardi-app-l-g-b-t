@@ -76,5 +76,4 @@ websocket-client==1.8.0
 websockets==14.2
 wsproto==1.2.0
 XlsxWriter==3.2.2
-undetected-chromedriver==3.5.5
 
