@@ -16,7 +16,7 @@ import json
 import io
 import os
 from datetime import datetime
-import undetected_chromedriver
+import undetected_chromedriver as uc
 
 # 🔑 Configuração do 2Captcha
 API_KEY = st.secrets["auth_token"]
@@ -25,35 +25,7 @@ API_KEY = st.secrets["auth_token"]
 captcha_token = None
 captcha_expiration_time = 0  
 
-try:
-    options = undetected_chromedriver.ChromeOptions()
-    options.add_argument("--no-sandbox")
-    options.add_argument("--disable-dev-shm-usage")
-    options.add_argument("--disable-blink-features=AutomationControlled")
-    options.add_argument("--disable-extensions")
-    options.add_argument("--disable-popup-blocking")
-    options.add_argument("--disable-plugins-discovery")
-    options.add_argument("--incognito")
-    options.add_argument("--headless")
-    options.add_argument("--disable-gpu")
-    options.add_argument(
-        "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-        "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"
-    )
-
-    driver = undetected_chromedriver.Chrome(options=options, headless=True, use_subprocess=True)
-    wait = WebDriverWait(driver, 30)
-
-    # Anti-detecção extra (opcional)
-    driver.execute_cdp_cmd('Network.setUserAgentOverride', {
-        "userAgent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) '
-                     'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'
-    })
-    driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
-
-except Exception as e:
-    st.error("⚠️ Ocorreu um problema ao configurar o navegador automático. Verifique sua conexão com a internet ou tente novamente mais tarde.")
-    st.stop()
+driver = uc.Chrome(headless=True,use_subprocess=False)
 
 
 def buscar_jurisprudencias_unificadas(termos):
