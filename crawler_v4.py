@@ -44,7 +44,7 @@ options.add_experimental_option("excludeSwitches", ["enable-automation"])
 options.add_experimental_option('useAutomationExtension', False)
 
 try:
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager(headless=True, use_subprocess=True).install()), options=options)
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
     wait = WebDriverWait(driver, 30)
     # Ajuste anti-detecção
     driver.execute_cdp_cmd('Network.setUserAgentOverride', {
