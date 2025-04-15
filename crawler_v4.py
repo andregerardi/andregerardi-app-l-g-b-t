@@ -26,7 +26,7 @@ captcha_token = None
 captcha_expiration_time = 0  
 
 # 🚗 Configuração do Selenium (Anti-detecção)
-options = undetected_chromedriver.ChromeOptions()
+options = webdriver.ChromeOptions()
 options.add_argument("--no-sandbox")
 options.add_argument("--disable-dev-shm-usage")
 options.add_argument("--disable-blink-features=AutomationControlled")
@@ -44,9 +44,9 @@ options.add_experimental_option("excludeSwitches", ["enable-automation"])
 options.add_experimental_option('useAutomationExtension', False)
 
 try:
-    driver = undetected_chromedriver.Chrome(options=options, headless=True, use_subprocess=True)
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager(headless=True, use_subprocess=True).install()), options=options)
     wait = WebDriverWait(driver, 30)
-
+    # Ajuste anti-detecção
     driver.execute_cdp_cmd('Network.setUserAgentOverride', {
         "userAgent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) '
                      'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'
